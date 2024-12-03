@@ -5,5 +5,5 @@ COPY app/package-lock.json .
 RUN npm install
 COPY app/ .
 RUN npm run
-EXPOSE 3000
+EXPOSE 3000 9876
 CMD ["npm", "start"]
