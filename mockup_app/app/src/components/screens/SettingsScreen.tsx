@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
 import { BottomNav } from "../navigation/BottomNav";
+import { PageId } from "../common/PageId";
 
 export function SettingsScreen() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
@@ -171,7 +172,7 @@ export function SettingsScreen() {
     );
 
     return (
-        <gridLayout rows="auto, *, auto" className="bg-gray-100">
+        <gridLayout rows="auto, *, auto, auto" className="bg-gray-100">
             {/* Header */}
             <gridLayout row={0} rows="auto" columns="auto, *, auto" className="p-4 bg-white border-b">
                 <button col={0} className="text-lg bg-gray-100 w-10 h-10 text-center" onTap={() => navigation.goBack()}>‹</button>
@@ -211,10 +212,17 @@ export function SettingsScreen() {
                 </scrollView>
             </gridLayout>
 
+          <contentView row={3}>
+                <PageId id="45678901" />
+            </contentView>
+
             {/* Footer */}
             <contentView row={2}>
                 <BottomNav />
             </contentView>
+
+            {/* Page ID */}
+
         </gridLayout>
     );
 }

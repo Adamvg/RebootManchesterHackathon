@@ -5,6 +5,7 @@ import { MainStackParamList } from "../../NavigationParamList";
 import { PaymentContactRow } from "../payments/PaymentContactRow";
 import { AlphabetDivider } from "../payments/AlphabetDivider";
 import { PaymentContext } from "../../contexts/PaymentContext";
+import { HelpButton } from "../common/HelpButton";
 
 export function PaymentContactsScreen() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
@@ -33,10 +34,11 @@ export function PaymentContactsScreen() {
     return (
         <gridLayout rows="auto, auto, *" className="bg-gray-100">
             {/* Header */}
-            <gridLayout row={0} columns="*, auto" className="p-4 bg-white border-b">
+            <gridLayout row={0} columns="*, auto, auto" className="p-4 bg-white border-b">
                 <label col={0} className="text-xl font-bold text-black">Choose who to pay</label>
+                <HelpButton col={1} />
                 <button 
-                    col={1} 
+                    col={2} 
                     className="text-lg bg-gray-100 w-10 h-10 text-center"
                     onTap={() => navigation.goBack()}
                 >✕</button>

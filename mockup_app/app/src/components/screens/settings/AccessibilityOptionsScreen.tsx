@@ -100,6 +100,7 @@ export function AccessibilityOptionsScreen() {
                             Contact Support
                         </button>
                     </stackLayout>
+            
                 </stackLayout>
             </scrollView>
         </gridLayout>

@@ -8,12 +8,13 @@ import { HorizontalNav } from "../navigation/HorizontalNav";
 import { EverydayView } from "../everyday/EverydayView";
 import { SaveInvestView } from "../saveinvest/SaveInvestView";
 import { TabContext } from "../../contexts/TabContext";
+import { PageId } from "../common/PageId";
 
 export function HomeScreen() {
     const { activeTab, setActiveTab } = React.useContext(TabContext);
 
     return (
-        <gridLayout rows="auto, *, auto" className="bg-gray-100">
+        <gridLayout rows="auto, *, auto, auto" className="bg-gray-100">
             {/* Fixed Header */}
             <stackLayout row={0}>
                 <Header />

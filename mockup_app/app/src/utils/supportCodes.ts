@@ -32,7 +32,12 @@ export const supportCodes = {
     "89012": "Statements",
 
     // Inbox
-    "90123": "Inbox"
+    "90123": "Inbox",
+
+    // Guided Flows
+    "11111": "GuidedPayment",
+    "22222": "GuidedStatement",
+    "33333": "GuidedStandingOrder"
 } as const;
 
 export type SupportCode = keyof typeof supportCodes;
@@ -43,6 +48,9 @@ export function isValidSupportCode(code: string): code is SupportCode {
 
 export function getDestinationFromCode(code: string): string | null {
     if (isValidSupportCode(code)) {
+        if (code === "11111" || code === "22222" || code === "33333") {
+            return "Home";
+        }
         return supportCodes[code];
     }
     return null;

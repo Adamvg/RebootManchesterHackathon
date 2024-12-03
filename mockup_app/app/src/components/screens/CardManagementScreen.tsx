@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
 import { BottomNav } from "../navigation/BottomNav";
+import { HelpButton } from "../common/HelpButton";
 
 export function CardManagementScreen() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
@@ -13,11 +14,7 @@ export function CardManagementScreen() {
             <gridLayout row={0} rows="auto" columns="auto, *, auto, auto" className="p-4 bg-white border-b">
                 <button col={0} className="text-lg bg-gray-100 w-10 h-10 text-center" onTap={() => navigation.goBack()}>‹</button>
                 <label col={1} className="text-xl font-bold ml-2">Card Management</label>
-                <button 
-                    col={2} 
-                    className="text-lg mx-1 bg-gray-100 w-10 h-10 text-center"
-                    onTap={() => navigation.navigate("Support")}
-                >❓</button>
+                <HelpButton col={2} />
                 <button 
                     col={3} 
                     className="text-lg bg-gray-100 w-10 h-10 text-center"

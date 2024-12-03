@@ -3,6 +3,7 @@ import * as ReactNativeScript from 'react-nativescript';
 import { MainStack } from './components/MainStack';
 import { TabProvider } from './contexts/TabContext';
 import { PaymentProvider } from './contexts/PaymentContext';
+import { GuidedFlowProvider } from './contexts/GuidedFlowContext';
 
 // Controls react-nativescript log verbosity.
 // - true: all logs;
@@ -16,7 +17,11 @@ const AppWrapper = () => {
         React.createElement(
             PaymentProvider,
             {},
-            React.createElement(MainStack, {}, null)
+            React.createElement(
+                GuidedFlowProvider,
+                {},
+                React.createElement(MainStack, {}, null)
+            )
         )
     );
 };

@@ -140,6 +140,8 @@ export function RegularPaymentsScreen() {
             <button row={2} className="bg-black text-white font-bold p-4 m-4 rounded-lg text-center">
                 Setup Standing Order
             </button>
+
         </gridLayout>
+
     );
 }

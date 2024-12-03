@@ -24,4 +24,5 @@ export type MainStackParamList = {
   RegularPayments: undefined;
   Statements: undefined;
   Inbox: undefined;
+  MessageUs: undefined;
 };

@@ -1,9 +1,10 @@
 import * as React from "react";
+import { PageId } from "../common/PageId";
 
 export function SaveInvestView() {
     return (
         <scrollView>
-            <stackLayout className="pb-4">
+            <stackLayout>
                 {/* Main Calculator Card */}
                 <stackLayout className="bg-white rounded-lg mx-4 my-4 p-6">
                     <label className="text-3xl text-center mb-2">🏺</label>
@@ -88,6 +89,7 @@ export function SaveInvestView() {
                         <button className="bg-black text-white font-bold p-4 rounded-lg text-center">Share feedback</button>
                     </stackLayout>
                 </stackLayout>
+                <PageId id="34567890" />
             </stackLayout>
         </scrollView>
     );

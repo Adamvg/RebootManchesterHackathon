@@ -3,10 +3,13 @@ import { useNavigation, useFocusEffect } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
 import { PaymentContext } from "../../contexts/PaymentContext";
+import { GuidedFlowContext } from "../../contexts/GuidedFlowContext";
+import { HelpButton } from "../common/HelpButton";
 
 export function PaymentsScreen() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
     const { selectedContact, setSelectedContact } = React.useContext(PaymentContext);
+    const { isGuided, currentStep, completeStep } = React.useContext(GuidedFlowContext);
     const [amount, setAmount] = React.useState("");
     const [reference, setReference] = React.useState("");
     const [isStandingOrder, setIsStandingOrder] = React.useState(false);
@@ -19,13 +22,20 @@ export function PaymentsScreen() {
         }, [setSelectedContact])
     );
 
+    const isRecipientHighlighted = isGuided && currentStep === 'recipient';
+
+    const handleRecipientClick = () => {
+        navigation.navigate("PaymentContacts");
+    };
+
     return (
         <gridLayout rows="auto, *" className="bg-gray-100">
             {/* Header */}
-            <gridLayout row={0} rows="auto" columns="*, auto" className="p-4 bg-white border-b">
+            <gridLayout row={0} rows="auto" columns="*, auto, auto" className="p-4 bg-white border-b">
                 <label col={0} className="text-xl font-bold">Pay & Transfer</label>
+                <HelpButton col={1} />
                 <button 
-                    col={1} 
+                    col={2} 
                     className="text-lg bg-gray-100 w-10 h-10 text-center"
                     onTap={() => {
                         setSelectedContact(null);
@@ -53,8 +63,8 @@ export function PaymentsScreen() {
                     <label className="p-4 font-medium mt-2">To:</label>
                     <gridLayout 
                         columns="auto, *, auto" 
-                        className="p-4 bg-white mx-2 rounded-lg"
-                        onTap={() => navigation.navigate("PaymentContacts")}
+                        className={`p-4 mx-2 rounded-lg ${isRecipientHighlighted ? 'bg-[#11B67A]' : 'bg-white'}`}
+                        onTap={handleRecipientClick}
                     >
                         <label col={0} className="text-xl mr-2">👤</label>
                         <stackLayout col={1}>
@@ -120,7 +130,7 @@ export function PaymentsScreen() {
                                     <label col={0} className="text-black">Make a standing order</label>
                                     <button 
                                         col={1} 
-                                        className={`w-12 h-6 rounded-full ${isStandingOrder ? 'bg-green-500' : 'bg-gray-300'}`}
+                                        className={`w-12 h-6 rounded-full ${isStandingOrder ? 'bg-[#11B67A]' : 'bg-gray-300'}`}
                                         onTap={() => setIsStandingOrder(!isStandingOrder)}
                                     />
                                 </gridLayout>

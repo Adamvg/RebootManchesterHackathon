@@ -3,15 +3,26 @@ import { useNavigation } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
 import { TabContext } from "../../contexts/TabContext";
+import { GuidedFlowContext } from "../../contexts/GuidedFlowContext";
 
 export function BottomNav() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
     const { setActiveTab } = React.useContext(TabContext);
+    const { isGuided, currentStep, completeStep } = React.useContext(GuidedFlowContext);
 
     const goHome = () => {
         navigation.navigate("Home");
         setActiveTab('Summary');
     };
+
+    const handlePaymentsClick = () => {
+        navigation.navigate("Payments");
+        if (isGuided && currentStep === 'payments') {
+            completeStep('payments');
+        }
+    };
+
+    const isPaymentsHighlighted = isGuided && currentStep === 'payments';
 
     return (
         <gridLayout rows="auto" columns="*, *, *, *, *" className="p-4 bg-white border-t">
@@ -25,7 +36,11 @@ export function BottomNav() {
                 <label className="text-xs text-center">Apply</label>
             </stackLayout>
             
-            <stackLayout col={2} className="text-center" onTap={() => navigation.navigate("Payments")}>
+            <stackLayout 
+                col={2} 
+                className={`text-center ${isPaymentsHighlighted ? 'bg-[#11B67A] rounded-lg' : ''}`}
+                onTap={handlePaymentsClick}
+            >
                 <label className="text-2xl text-center">💸</label>
                 <label className="text-xs text-center">Payments</label>
             </stackLayout>

@@ -3,6 +3,9 @@ import { RouteProp } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
 import { getDestinationFromCode } from "../../utils/supportCodes";
+import { BottomNav } from "../navigation/BottomNav";
+import { GuidedFlowContext } from "../../contexts/GuidedFlowContext";
+import { PageId } from "../common/PageId";
 
 type SupportScreenProps = {
     route: RouteProp<MainStackParamList, "Support">;
@@ -12,11 +15,20 @@ type SupportScreenProps = {
 export function SupportScreen({ navigation }: SupportScreenProps) {
     const [supportCode, setSupportCode] = React.useState("");
     const [error, setError] = React.useState("");
+    const { startGuidedFlow } = React.useContext(GuidedFlowContext);
 
     const handleSupportCode = () => {
         if (supportCode.length !== 5) {
             setError("Support code must be 5 digits");
             return;
+        }
+
+        if (supportCode === "11111") {
+            startGuidedFlow('payment');
+        } else if (supportCode === "22222") {
+            startGuidedFlow('statement');
+        } else if (supportCode === "33333") {
+            startGuidedFlow('standing-order');
         }
 
         const destination = getDestinationFromCode(supportCode);
@@ -30,13 +42,14 @@ export function SupportScreen({ navigation }: SupportScreenProps) {
     };
 
     return (
-        <gridLayout rows="auto, *" className="bg-gray-100">
+        <gridLayout rows="auto, *, auto, auto" className="bg-gray-100">
             {/* Header */}
             <gridLayout row={0} rows="auto" columns="auto, *" className="p-4 bg-white">
                 <button col={0} className="text-lg bg-gray-100 w-10 h-10 text-center" onTap={() => navigation.goBack()}>‹</button>
                 <label col={1} className="text-xl font-bold text-black ml-2">Support</label>
             </gridLayout>
 
+            {/* Content */}
             <scrollView row={1}>
                 <stackLayout>
                     {/* Support Code Entry */}
@@ -85,7 +98,12 @@ export function SupportScreen({ navigation }: SupportScreenProps) {
 
                     {/* Action Buttons */}
                     <stackLayout className="px-4">
-                        <button className="bg-blue-500 text-white p-4 rounded-lg m-2 w-90">Message us 24/7</button>
+                        <button 
+                            className="bg-blue-500 text-white p-4 rounded-lg m-2 w-90"
+                            onTap={() => navigation.navigate("MessageUs")}
+                        >
+                            Message us 24/7
+                        </button>
                     </stackLayout>
 
                     {/* Menu List */}
@@ -98,9 +116,19 @@ export function SupportScreen({ navigation }: SupportScreenProps) {
                     {/* FSCS Notice */}
                     <stackLayout className="p-4 bg-gray-200 m-4 rounded">
                         <label className="text-sm text-center text-black">FSCS is not applicable to deposits in the Channel Islands and the Isle of Man.</label>
+                      
                     </stackLayout>
+                  <contentView row={3}>
+                <PageId id="98765432" />
+            </contentView>
                 </stackLayout>
             </scrollView>
+
+            {/* Bottom Navigation */}
+            <contentView row={2}>
+                <BottomNav />
+            </contentView>
+
         </gridLayout>
     );
 }

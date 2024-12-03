@@ -2,11 +2,22 @@ import * as React from "react";
 import { useNavigation } from "@react-navigation/core";
 import { FrameNavigationProp } from "react-nativescript-navigation";
 import { MainStackParamList } from "../../NavigationParamList";
+import { GuidedFlowContext } from "../../contexts/GuidedFlowContext";
 
 export function StatementsScreen() {
     const navigation = useNavigation<FrameNavigationProp<MainStackParamList>>();
     const [selectedYear, setSelectedYear] = React.useState(2024);
     const [selectedMonth, setSelectedMonth] = React.useState<string | null>(null);
+    const { isGuided, currentStep, flowType, completeStep } = React.useContext(GuidedFlowContext);
+
+    const handleViewTap = () => {
+        if (isGuided && currentStep === 'statements' && flowType === 'statement') {
+            completeStep('statements');
+        }
+        // Add your view statement logic here
+    };
+
+    const isViewHighlighted = isGuided && currentStep === 'statements' && flowType === 'statement';
 
     const months = [
         ["JAN", "FEB", "MAR"],
@@ -74,11 +85,21 @@ export function StatementsScreen() {
             {/* View Button */}
             <button 
                 row={4} 
-                className="bg-black text-white font-bold p-4 m-4 rounded-lg"
+                className={`p-4 m-4 rounded-lg font-bold ${
+                    isViewHighlighted 
+                        ? 'bg-[#11B67A]' 
+                        : 'bg-black'
+                } text-white`}
                 isEnabled={selectedMonth !== null}
+                onTap={handleViewTap}
             >
                 View
             </button>
         </gridLayout>
+
+      
     );
+  <contentView row={3}>
+                <PageId id="98765432" />
+            </contentView>
 }

@@ -3,15 +3,17 @@ import { AccountCard } from "./AccountCard";
 import { OffersCard } from "./OffersCard";
 import { CardManagementCard } from "./CardManagementCard";
 import { MoreForYouGrid } from "./MoreForYouGrid";
+import { PageId } from "../common/PageId";
 
 export function EverydayView() {
     return (
         <scrollView>
-            <stackLayout className="pb-4">
+            <stackLayout>
                 <AccountCard />
                 <OffersCard />
                 <CardManagementCard />
                 <MoreForYouGrid />
+                <PageId id="23456789" />
             </stackLayout>
         </scrollView>
     );

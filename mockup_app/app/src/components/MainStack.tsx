@@ -26,6 +26,7 @@ import { LegalInformationScreen } from "./screens/settings/LegalInformationScree
 import { RegularPaymentsScreen } from "./screens/RegularPaymentsScreen";
 import { StatementsScreen } from "./screens/StatementsScreen";
 import { InboxScreen } from "./screens/InboxScreen";
+import { MessageUsScreen } from "./screens/MessageUsScreen";
 
 const StackNavigator = stackNavigatorFactory();
 
@@ -136,6 +137,10 @@ export const MainStack = () => (
             <StackNavigator.Screen
                 name="Inbox"
                 component={InboxScreen}
+            />
+            <StackNavigator.Screen
+                name="MessageUs"
+                component={MessageUsScreen}
             />
         </StackNavigator.Navigator>
     </BaseNavigationContainer>
