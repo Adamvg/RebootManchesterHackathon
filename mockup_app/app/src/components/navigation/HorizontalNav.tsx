@@ -6,7 +6,7 @@ interface HorizontalNavProps {
 }
 
 export function HorizontalNav({ activeTab, onTabChange }: HorizontalNavProps) {
-    const tabs = ['Summary', 'Everyday', 'Save & Invest', 'Borrow', 'Insure'];
+    const tabs = ['Summary', 'Everyday', 'Save & Invest', 'Borrow', 'Insure', 'Chatbot'];
 
     return (
         <scrollView orientation="horizontal" className="px-2">

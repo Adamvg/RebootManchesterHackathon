@@ -8,6 +8,7 @@ import { HorizontalNav } from "../navigation/HorizontalNav";
 import { EverydayView } from "../everyday/EverydayView";
 import { SaveInvestView } from "../saveinvest/SaveInvestView";
 import { TabContext } from "../../contexts/TabContext";
+import { ChatBotView } from "../chatbot/ChatBotView";
 
 export function HomeScreen() {
     const { activeTab, setActiveTab } = React.useContext(TabContext);
@@ -34,6 +35,8 @@ export function HomeScreen() {
                     <EverydayView />
                 ) : activeTab === 'Save & Invest' ? (
                     <SaveInvestView />
+                ) : activeTab == "Chatbot" ? (
+                    <ChatBotView />
                 ) : (
                     <label className="text-center p-4">Coming soon...</label>
                 )}
